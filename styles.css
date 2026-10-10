@@ -1,0 +1,133 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #17191d;
+  background: #f5f6f8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+body { min-height: 100vh; }
+button { font: inherit; }
+
+.app-shell {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+.calculator {
+  width: min(100%, 390px);
+  background: #ffffff;
+  border: 1px solid #e4e6ea;
+  border-radius: 24px;
+  box-shadow: 0 18px 45px rgba(24, 30, 38, 0.09), 0 2px 7px rgba(24, 30, 38, 0.04);
+  padding: 20px;
+}
+
+.calculator-header { display: flex; align-items: center; justify-content: space-between; padding: 0 2px 15px; }
+.eyebrow { display: block; color: #858a94; font-size: 10px; font-weight: 750; letter-spacing: .15em; }
+h1 { margin: 3px 0 0; font-size: 16px; line-height: 1.2; font-weight: 700; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #4c515a; }
+
+.display {
+  min-height: 142px;
+  border: 1px solid #e6e8ec;
+  background: #fafbfc;
+  border-radius: 16px;
+  padding: 16px 17px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+.expression {
+  min-height: 21px;
+  color: #7a808a;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+.result {
+  margin-top: 3px;
+  color: #16181c;
+  font-size: clamp(32px, 10vw, 43px);
+  line-height: 1.12;
+  font-weight: 680;
+  letter-spacing: -.035em;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  text-align: right;
+}
+.result::-webkit-scrollbar { display: none; }
+.display.has-error { border-color: #c8a9a9; }
+.display.has-error .result { color: #8c3030; font-size: 24px; letter-spacing: -.01em; }
+
+.keypad {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+.key {
+  min-height: 58px;
+  border: 1px solid #e5e7eb;
+  border-radius: 13px;
+  background: #fff;
+  color: #202329;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 650;
+  transition: transform 80ms ease, background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.key:hover { background: #f6f7f9; border-color: #d9dce1; }
+.key:active { transform: translateY(1px); background: #eef0f3; }
+.key:focus-visible { outline: 3px solid rgba(42, 47, 55, .25); outline-offset: 2px; }
+.key.utility { color: #5e646e; background: #f7f8fa; font-size: 15px; }
+.key.operator { background: #f1f2f4; color: #17191d; }
+.key.operator:hover { background: #e9ebee; }
+.key.operator.selected { border-color: #aeb3bb; box-shadow: inset 0 0 0 1px #aeb3bb; }
+.key.equals { background: #1f2329; border-color: #1f2329; color: #fff; }
+.key.equals:hover { background: #15181c; }
+.key.equals:active { background: #0e1013; }
+
+.calculator-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 2px 1px;
+  color: #8a8f98;
+  font-size: 10px;
+  line-height: 1.3;
+}
+.shortcut-hint { text-align: right; }
+
+@media (max-width: 430px) {
+  .app-shell { padding-left: 12px; padding-right: 12px; }
+  .calculator { border-radius: 20px; padding: 15px; }
+  .display { min-height: 132px; }
+  .keypad { gap: 8px; }
+  .key { min-height: 55px; }
+}
+
+@media (max-height: 720px) and (min-width: 431px) {
+  .calculator { padding: 15px; }
+  .calculator-header { padding-bottom: 10px; }
+  .display { min-height: 112px; }
+  .key { min-height: 48px; }
+  .keypad { margin-top: 10px; gap: 7px; }
+  .calculator-footer { padding-top: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key { transition: none; }
+}
